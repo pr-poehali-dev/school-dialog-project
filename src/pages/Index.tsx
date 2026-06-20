@@ -79,6 +79,7 @@ const Index = () => {
   const [openId, setOpenId] = useState<number | null>(1);
   const [modalOpen, setModalOpen] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', question: '' });
+  const [sending, setSending] = useState(false);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -90,13 +91,24 @@ const Index = () => {
     );
   }, [search]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setModalOpen(false);
-    setForm({ name: '', email: '', question: '' });
-    toast.success('Спасибо! Ваш вопрос отправлен директору школы.', {
-      duration: 5000,
-    });
+    setSending(true);
+    try {
+      const res = await fetch('https://functions.poehali.dev/9479f46e-608f-45ee-9150-9dc7fdaae786', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
+      setModalOpen(false);
+      setForm({ name: '', email: '', question: '' });
+      toast.success('Спасибо! Ваш вопрос отправлен директору школы.', { duration: 5000 });
+    } catch {
+      toast.error('Не удалось отправить вопрос. Попробуйте позже.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -353,10 +365,11 @@ const Index = () => {
             <Button
               type="submit"
               size="lg"
-              className="h-12 w-full rounded-full bg-primary text-base font-bold text-white transition-transform hover:scale-[1.02] hover:bg-primary/90"
+              disabled={sending}
+              className="h-12 w-full rounded-full bg-primary text-base font-bold text-white transition-transform hover:scale-[1.02] hover:bg-primary/90 disabled:opacity-70"
             >
-              <Icon name="Send" size={18} className="mr-2" />
-              Отправить вопрос
+              <Icon name={sending ? 'Loader' : 'Send'} size={18} className={`mr-2 ${sending ? 'animate-spin' : ''}`} />
+              {sending ? 'Отправляем...' : 'Отправить вопрос'}
             </Button>
           </form>
         </DialogContent>
