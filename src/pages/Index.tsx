@@ -15,7 +15,7 @@ import {
 import { toast } from 'sonner';
 
 const PRINCIPAL_PHOTO =
-  'https://cdn.poehali.dev/projects/232d6207-a596-4dad-9606-e8bc24512edc/bucket/f9737bca-16e2-4845-83ce-d6dd06042103.jpg';
+  'https://cdn.poehali.dev/projects/232d6207-a596-4dad-9606-e8bc24512edc/bucket/7d73ee82-d1fd-43a8-b763-3e9d41c69508.jpg';
 
 interface FaqItem {
   id: number;
