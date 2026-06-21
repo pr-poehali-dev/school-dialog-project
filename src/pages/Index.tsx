@@ -271,32 +271,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* ОБРАТНАЯ СВЯЗЬ */}
-        <section className="mt-20 md:mt-28">
-          <div className="glass relative overflow-hidden rounded-[28px] p-8 text-center shadow-2xl shadow-primary/10 sm:p-14">
-            <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/15 blur-2xl" aria-hidden />
-            <div className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-secondary/15 blur-2xl" aria-hidden />
-            <div className="relative">
-              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-white">
-                <Icon name="Send" size={28} />
-              </div>
-              <h2 className="font-display text-2xl font-extrabold text-primary sm:text-3xl">
-                Не нашли ответ на свой вопрос?
-              </h2>
-              <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-                Напишите его напрямую — директор обязательно ответит
-              </p>
-              <Button
-                onClick={() => setModalOpen(true)}
-                size="lg"
-                className="mt-7 rounded-full bg-accent px-8 py-6 text-base font-bold text-accent-foreground shadow-lg shadow-accent/30 transition-transform hover:scale-105 hover:bg-accent"
-              >
-                <Icon name="MessageCircleQuestion" size={20} className="mr-2" />
-                Задать свой вопрос директору
-              </Button>
-            </div>
-          </div>
-        </section>
+
       </main>
 
       {/* FOOTER */}
